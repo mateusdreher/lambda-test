@@ -1,0 +1,22 @@
+service: sls-my-first-lambda
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
+  region: 'us-east-1'
+  memorySize: 128 ##Mb
+  timeout: 3
+
+functions:
+  my-function-name:
+    handler: functions/my-function.handler
+    description: My first lambda function to test
+    runtime: nodejs14.x
+    memorySize: 128
+    timeout: 3
+    events:
+      - http:
+          path: /functions
+          method: get
+          cors: true
